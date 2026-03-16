@@ -25,10 +25,10 @@ public class TicTacToe{
             for (int horisontell = 0; horisontell < 3; horisontell++)
                 Bräda[vertikal][horisontell] = Sign; // Fyller alla rutor med '-', används för tom plats.
 
-        while (GameIsOn) {
-            System.out.println("Vem vill börja först? Ange X eller O"); // Terminal msg.
-            char First = input.nextLine().charAt(0); // Scannar input.
+        System.out.println("Vem vill börja först? Ange X eller O"); // Terminal msg.
+        char First = input.nextLine().charAt(0); // Scannar input.
 
+        while (GameIsOn) {
             System.out.println();
             if (First != 'X' && First != 'O'){ // if-sats.
                 System.out.println();
@@ -42,8 +42,7 @@ public class TicTacToe{
         int horisontell = 0;
 
             while (GameIsOn) {
-                while (true) {
-
+                while (GameIsOn) {
                     System.out.println("Spelare 1, ange position 0-2 för vertikal");
                     vertikal = input.nextInt();
                     input.nextLine();
@@ -52,12 +51,10 @@ public class TicTacToe{
                         System.out.println("Ange ett värde mellan (0-2)!");
                         continue;
                     }
-
                     break;
                 }
 
                 while (true) {
-
                     System.out.println("Spelare 1, ange position 0-2 för horisontell");
                     horisontell = input.nextInt();
                     input.nextLine();
@@ -66,10 +63,8 @@ public class TicTacToe{
                         System.out.println("Ange ett värde mellan (0-2)!");
                         continue;
                     }
-
                     break;
                 }
-
                 break;
             }
 
