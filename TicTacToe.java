@@ -10,7 +10,26 @@ public class TicTacToe{
         System.out.println();
     }
 
-}
+    }
+
+    public static boolean KollaVinnaren(char [][] Bräda, char currentPlayer) {
+        for (int i = 0; i < 3; i++) // vertikal
+            if (Bräda[i][0] == currentPlayer && Bräda[i][1] == currentPlayer && Bräda[i][2] == currentPlayer)
+                return true;
+
+        for (int j = 0; j < 3; j++) // horisontell
+            if (Bräda[0][j] == currentPlayer && Bräda[1][j] == currentPlayer && Bräda[2][j] == currentPlayer)
+                return true;
+
+        if (Bräda[0][0] == currentPlayer && Bräda[1][1] == currentPlayer && Bräda[2][2] == currentPlayer) // diagonal \
+            return true;
+
+        if (Bräda[0][2] == currentPlayer && Bräda[1][1] == currentPlayer && Bräda[2][0] == currentPlayer) // diagonal /
+            return true;
+
+        return false;
+    }
+
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in); // Skapar Scanner för att läsa från tangentbordet.
         boolean GameIsOn = true; // Spelet är på.
@@ -80,6 +99,17 @@ public class TicTacToe{
             }
 
             printaBrädan(Bräda); // Printar brädan.
+            
+            if (KollaVinnaren(Bräda, currentPlayer)) { // Kollar om den aktuella spelaren har vunnit.
+                System.out.println("Grattis! Spelare " + currentPlayer + " har vunnit!");
+                GameIsOn = false; // Spelet är slut.
+            }
+
+            if (Drag == 9) {
+                System.out.println("Oavgjort!");
+                GameIsOn = false;
+                break;
+            }
 
             if (currentPlayer == 'X') //om det är X:s tur, byt till O.
                 currentPlayer = 'O';
