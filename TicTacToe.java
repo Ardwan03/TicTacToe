@@ -26,24 +26,26 @@ public class TicTacToe{
                 Bräda[vertikal][horisontell] = Sign; // Fyller alla rutor med '-', används för tom plats.
 
         System.out.println("Vem vill börja först? Ange X eller O"); // Terminal msg.
-        char First = input.nextLine().charAt(0); // Scannar input.
+        char First = Character.toUpperCase(input.nextLine().charAt(0)); // Scannar input.
+
+        System.out.println();
+        if (First != 'X' && First != 'O'){ // if-sats.
+            System.out.println();
+            System.out.println("Ange endast X eller O");
+            return;
+        }
+        else
+            System.out.println("Spelare 1 är: " + First);
+
+        char currentPlayer = First; // Variabel som håller reda på vilken spelare som är aktuell.
 
         while (GameIsOn) {
-            System.out.println();
-            if (First != 'X' && First != 'O'){ // if-sats.
-                System.out.println();
-                System.out.println("Ange endast X eller O");
-                continue;
-            }
-            else
-                System.out.println("Spelare 1 är: " + First);
-
-        int vertikal = 0;
-        int horisontell = 0;
+            int vertikal = 0;
+            int horisontell = 0;
 
             while (GameIsOn) {
                 while (GameIsOn) {
-                    System.out.println("Spelare 1, ange position 0-2 för vertikal");
+                    System.out.println("Spelare " + currentPlayer + ", ange position 0-2 för vertikal");
                     vertikal = input.nextInt();
                     input.nextLine();
 
@@ -55,7 +57,7 @@ public class TicTacToe{
                 }
 
                 while (true) {
-                    System.out.println("Spelare 1, ange position 0-2 för horisontell");
+                    System.out.println("Spelare " + currentPlayer + ", ange position 0-2 för horisontell");
                     horisontell = input.nextInt();
                     input.nextLine();
 
@@ -73,11 +75,16 @@ public class TicTacToe{
                 continue;
             }
             else {
-                Bräda[vertikal][horisontell] = First;
-                Drag++;
+                Bräda[vertikal][horisontell] = currentPlayer; // Sätter den aktuella spelarens tecken på den valda positionen.
+                Drag++; // Ökar antalet drag.
             }
 
-            printaBrädan(Bräda);
+            printaBrädan(Bräda); // Printar brädan.
+
+            if (currentPlayer == 'X') //om det är X:s tur, byt till O.
+                currentPlayer = 'O';
+            else // Annars, byt till X.
+                currentPlayer = 'X';
         }
 
 
