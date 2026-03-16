@@ -3,13 +3,11 @@ import java.util.Scanner; // Importerar Scanner för inmatning.
 public class TicTacToe{
 
     public static void printaBrädan(char[][] Bräda) { // Metod som skriver ut spelbrädet.
-
-    for (int vertikal = 0; vertikal < 3; vertikal++) {
-        for (int horisontell = 0; horisontell < 3; horisontell++)
-            System.out.print(Bräda[vertikal][horisontell] + " ");
-        System.out.println();
-    }
-
+        for (int vertikal = 0; vertikal < 3; vertikal++) {
+            for (int horisontell = 0; horisontell < 3; horisontell++)
+                System.out.print(Bräda[vertikal][horisontell] + " ");
+            System.out.println();
+        }
     }
 
     public static boolean KollaVinnaren(char [][] Bräda, char currentPlayer) {
@@ -35,9 +33,6 @@ public class TicTacToe{
         boolean GameIsOn = true; // Spelet är på.
         char Sign = '-'; // Ett tecken som visar tom plats senare.
         char [][] Bräda = new char [3][3]; // Spelbrädan, 3x3.
-
-        char X = 'X'; // Spelare X.
-        char O = 'O'; // Spelare O.
         int Drag = 0; // Antal drag per runda.
 
         for (int vertikal = 0; vertikal < 3; vertikal++)
@@ -58,30 +53,32 @@ public class TicTacToe{
 
         char currentPlayer = First; // Variabel som håller reda på vilken spelare som är aktuell.
 
+        printaBrädan(Bräda); // Printar brädan.
+
         while (GameIsOn) {
             int vertikal = 0;
             int horisontell = 0;
 
             while (GameIsOn) {
                 while (GameIsOn) {
-                    System.out.println("Spelare " + currentPlayer + ", ange position 0-2 för vertikal");
+                    System.out.println("Spelare " + currentPlayer + ", ange position 1-3 för vertikal");
                     vertikal = input.nextInt();
                     input.nextLine();
 
-                    if (vertikal < 0 || vertikal > 2){
-                        System.out.println("Ange ett värde mellan (0-2)!");
+                    if (vertikal < 1 || vertikal > 3){
+                        System.out.println("Ange ett värde mellan (1-3)!");
                         continue;
                     }
                     break;
                 }
 
                 while (true) {
-                    System.out.println("Spelare " + currentPlayer + ", ange position 0-2 för horisontell");
+                    System.out.println("Spelare " + currentPlayer + ", ange position 1-3 för horisontell");
                     horisontell = input.nextInt();
                     input.nextLine();
 
-                    if (horisontell < 0 || horisontell > 2){
-                        System.out.println("Ange ett värde mellan (0-2)!");
+                    if (horisontell < 1 || horisontell > 3){
+                        System.out.println("Ange ett värde mellan (1-3)!");
                         continue;
                     }
                     break;
@@ -89,20 +86,21 @@ public class TicTacToe{
                 break;
             }
 
-            if (Bräda[vertikal][horisontell] != '-') {
+            if (Bräda[vertikal-1][horisontell-1] != '-') {
                 System.out.println("Rutan är redan tagen.");
                 continue;
             }
             else {
-                Bräda[vertikal][horisontell] = currentPlayer; // Sätter den aktuella spelarens tecken på den valda positionen.
+                Bräda[vertikal-1][horisontell-1] = currentPlayer; // Sätter den aktuella spelarens tecken på den valda positionen.
                 Drag++; // Ökar antalet drag.
             }
 
             printaBrädan(Bräda); // Printar brädan.
-            
+
             if (KollaVinnaren(Bräda, currentPlayer)) { // Kollar om den aktuella spelaren har vunnit.
                 System.out.println("Grattis! Spelare " + currentPlayer + " har vunnit!");
                 GameIsOn = false; // Spelet är slut.
+                break;
             }
 
             if (Drag == 9) {
@@ -116,8 +114,6 @@ public class TicTacToe{
             else // Annars, byt till X.
                 currentPlayer = 'X';
         }
-
-
+        input.close();
     }
-
 }
